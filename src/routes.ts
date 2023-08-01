@@ -8,23 +8,29 @@ import { GetAllVideoController } from './controllers/GetAllVideoController';
 import { CreateUserController } from './controllers/CreateUserController';
 import { GetAllUserController } from './controllers/GetAllUserController';
 import { DeleteUserController } from './controllers/DeleteUserController';
+import { AuthUserController } from './controllers/auth/AuthUserController';
+import { TokenController } from './controllers/auth/TokenController';
+import { UpdateUserController } from './controllers/UpdateUserController';
 
 const routes = Router();
 
 routes
-    .get("/categories", new GetAllCategoryController().handle)
-    .post("/categories", new CreateCategoryController().handle)
-    .delete("/categories/:id", new DeleteCategoryController().handle)
-    .put("/categories/:id", new UpdateCategoryController().handle)
+    .get("/categories", new TokenController().handleCheck, new GetAllCategoryController().handle)
+    .post("/categories", new TokenController().handleCheck, new CreateCategoryController().handle)
+    .delete("/categories/:id", new TokenController().handleCheck, new DeleteCategoryController().handle)
+    .put("/categories/:id", new TokenController().handleCheck, new UpdateCategoryController().handle)
 
 routes
-    .get("/videos", new GetAllVideoController().handle)
-    .post("/videos", new CreateVideoController().handle)
+    .get("/videos", new TokenController().handleCheck, new GetAllVideoController().handle)
+    .post("/videos", new TokenController().handleCheck, new CreateVideoController().handle)
 
 routes
-    .get("/users", new GetAllUserController().handle)
-    .post("/users", new CreateUserController().handle)
-    .delete("/users/:id", new DeleteUserController().handle)
-    .put("/users/:id", new UpdateCategoryController().handle) 
+    .get("/users", new TokenController().handleCheck, new GetAllUserController().handle)
+    .post("/users", new TokenController().handleCheck, new CreateUserController().handle)
+    .delete("/users/:id", new TokenController().handleCheck, new DeleteUserController().handle)
+    .put("/users/:id", new TokenController().handleCheck, new UpdateUserController().handle) 
+
+routes
+    .post("/users/auth", new AuthUserController().handle)
 
 export { routes };

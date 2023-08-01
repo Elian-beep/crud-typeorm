@@ -23,7 +23,7 @@ export class UpdateUserService{
         user.email = email ? email : user.email;
 
         await repo.save(user);
-
+        user.password = '';
         return user;
     }
 }
