@@ -3,7 +3,6 @@ import { User } from "../entities/User";
 import bcrypt from 'bcrypt';
 
 type UserRequest = {
-    id: string;
     name: string;
     name_user: string;
     email: string;
@@ -17,7 +16,7 @@ export class CreateUserService{
         if(await repo.findOne({ where: { name } }))
             return new Error("Name already exists!");
         if(await repo.findOne({ where: { name_user } }))
-            return new Error("Name already exists!");
+            return new Error("Username already exists!");
         if(await repo.findOne({ where: { email } }))
             return new Error("Name already exists!");
 

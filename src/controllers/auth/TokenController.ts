@@ -3,18 +3,18 @@ import { TokenService } from "../../services/auth/TokenService";
 
 export class TokenController {
     async handleCheck(request: Request, response: Response, next: NextFunction) {
-        const authHeader = request.headers['authorization'];
-        const service = new TokenService();
-        if (!authHeader)
-            return response.status(500).json({ message: "Erro de autenticação" })
-
         try {
+            const authHeader = request.headers['authorization'];
+            const service = new TokenService();
+            if (!authHeader)
+                return response.status(500).json({ message: "Erro de autenticação" })
+
             const token = authHeader && authHeader.split(" ")[1];
             const result = service.check(token)
             if (!result)
                 return response.status(500).json(result);
             next();
-        }catch(e){
+        } catch (e) {
             return response.status(500).json({ erro: `Ocorreu um erro: ${e}` });
         }
     }

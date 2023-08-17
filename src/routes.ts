@@ -8,9 +8,9 @@ import { GetAllVideoController } from './controllers/GetAllVideoController';
 import { CreateUserController } from './controllers/CreateUserController';
 import { GetAllUserController } from './controllers/GetAllUserController';
 import { DeleteUserController } from './controllers/DeleteUserController';
+import { UpdateUserController } from './controllers/UpdateUserController';
 import { AuthUserController } from './controllers/auth/AuthUserController';
 import { TokenController } from './controllers/auth/TokenController';
-import { UpdateUserController } from './controllers/UpdateUserController';
 
 const routes = Router();
 
